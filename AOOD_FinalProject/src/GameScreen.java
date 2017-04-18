@@ -9,7 +9,7 @@ public class GameScreen {
 	public static void play(String s){
 		JFrame f = new JFrame();
 		JPanel p = new JPanel();
-		f.setSize(100, 100);
+		f.setSize(800, 800);
 		p.setVisible(true);
 		f.setVisible(true);
 		f.add(p);
