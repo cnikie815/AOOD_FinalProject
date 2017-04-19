@@ -25,6 +25,6 @@ public class Pieces {
 	}
 	//checks if its on edge(so it doesn't skip a row)
 	public boolean onEdge() {
-		return false;
+			return false;
 	}
 }
