@@ -2,6 +2,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class GameScreen {
+	Grid g = new Grid(8, 8);
 	public static void main(String[] args){
 		play("Checkers");
 	}
