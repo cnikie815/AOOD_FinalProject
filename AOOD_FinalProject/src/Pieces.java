@@ -23,7 +23,7 @@ public class Pieces {
 		}
 		return false;
 	}
-	//checks if its on edge(so it doesn't skip a row)
+	//checks if its on edge(so it doesn't skip a row).
 	public boolean onEdge() {
 		return false;
 	}
