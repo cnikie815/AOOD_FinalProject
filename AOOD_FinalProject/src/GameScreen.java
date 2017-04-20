@@ -1,19 +1,19 @@
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class GameScreen {
-	Grid g = new Grid(8, 8);
+	private static Grid g;
+	private static JLabel[][] images;
 	public static void main(String[] args){
 		play("Checkers");
 	}
 	
 	public static void play(String s){
-		JFrame f = new JFrame();
-		JPanel p = new JPanel();
-		f.setSize(800, 800);
-		p.setVisible(true);
+		g = new Grid();
+		JFrame f = new JFrame("Checkers");
+		f.setSize(775, 798);
 		f.setVisible(true);
-		f.add(p);
-		
+		f.add(g.getPanel());
 	}
 }
