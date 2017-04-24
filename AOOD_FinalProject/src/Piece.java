@@ -1,7 +1,10 @@
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 public class Piece {
 	int t;
 	boolean k;
+	ImageIcon image;
 	public Piece(int team, boolean king){
 		//team 0 = red, 1 = black
 		//king true = king, false = pawn
@@ -27,4 +30,6 @@ public class Piece {
 	public boolean onEdge() {
 			return false;
 	}
+	
+	
 }

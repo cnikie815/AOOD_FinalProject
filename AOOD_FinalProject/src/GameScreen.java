@@ -15,5 +15,6 @@ public class GameScreen {
 		f.setSize(775, 798);
 		f.setVisible(true);
 		f.add(g.getPanel());
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }
