@@ -1,4 +1,5 @@
+import javax.swing.TransferHandler;
 
-public class TransferImage {
+public class TransferImage extends TransferHandler{
 
 }
