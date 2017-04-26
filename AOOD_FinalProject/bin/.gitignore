@@ -5,3 +5,8 @@
 /DragNDrop.class
 /TransferImage.class
 /GameScreen.class
+/DnDTest.class
+/TestMouseDrag$1.class
+/TestMouseDrag$DragMyIcon.class
+/TestMouseDrag$MouseHandler.class
+/TestMouseDrag.class
