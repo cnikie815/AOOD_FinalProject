@@ -10,3 +10,5 @@
 /TestMouseDrag$DragMyIcon.class
 /TestMouseDrag$MouseHandler.class
 /TestMouseDrag.class
+/Grid$PieceClick.class
+/Grid$PieceDrag.class

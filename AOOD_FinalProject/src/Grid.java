@@ -2,6 +2,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -14,6 +17,7 @@ public class Grid{
 	GridLayout layout = new GridLayout();
 	Piece[][] red;
 	Piece[][] black;
+	private JLabel currentDrag;
 	public Grid(){
 		images = new JLabel[8][8];
 		red = new Piece[8][8];
@@ -48,4 +52,33 @@ public class Grid{
 	public JPanel getPanel(){
 		return p;
 	}
+	public void dropPiece(JLabel p){
+		
+	}
+	private class PieceClick extends MouseAdapter {
+		private JLabel p;
+		public void pieceClick(JLabel p){
+			this.p = p;
+		}
+		@Override
+		public void mousePressed(MouseEvent e){
+			currentDrag = this.p;
+		}
+		@Override
+		public void mouseReleased(MouseEvent e){
+			dropPiece(currentDrag);
+			currentDrag = null;
+		}
+	}
+	private class PieceDrag extends MouseMotionAdapter{
+		@Override
+		public void mouseDragged(MouseEvent e){
+			if(currentDrag != null){
+				int mouseX = currentDrag.getX() + e.getX();
+				int mouseY = currentDrag.getY() + e.getY();
+				currentDrag.setBounds(mouseX - currentDrag.getWidth() / 2, mouseY - currentDrag.getHeight() / 2, currentDrag.getWidth(), currentDrag.getHeight());
+			}
+		}
+	}
 }
+
