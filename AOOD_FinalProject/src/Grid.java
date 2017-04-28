@@ -59,9 +59,32 @@ public class Grid {
 		return p;
 	}
 	
-	public void reorderComponents(Component c){
+	public void reorderComponents(Component compo){
 		Component[] components = p.getComponents();
 		int i = 0;
+		int index = -1;
+		for(Component c :components){
+			if (c == compo){
+				index = i;
+			}
+			i++;
+		}
+		if (index != -1){
+			p.removeAll();
+			Component temp = components[index];
+			Component[] newComp = new Component[components.length];
+			newComp[0] = temp;
+			int tempI = 1;
+			for(Component c : components){
+				if(c!=temp){
+					newComp[tempI] = c;
+					tempI++;
+				}
+			}
+			for (Component comp : newComp){
+				p.add(comp);
+			}
+		}
 	}
 	
 	public void dropPiece(JLabel p) {
