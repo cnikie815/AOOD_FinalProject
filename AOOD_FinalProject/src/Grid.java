@@ -125,7 +125,7 @@ public class Grid {
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			dropPiece(currentDrag);
-			currentDrag = null;
+			currentDrag = null; 
 		}
 	}
 
