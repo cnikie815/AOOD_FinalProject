@@ -16,5 +16,6 @@ public class GameScreen {
 		f.setVisible(true);
 		f.add(g.getPanel());
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 	}
 }
