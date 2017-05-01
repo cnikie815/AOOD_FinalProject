@@ -15,15 +15,15 @@ import javax.swing.SwingUtilities;
 
 public class Grid {
 	GridComponent p = new GridComponent();
-	JLabel[][] images;
+	PieceImage[][] images;
 	Piece[][] pieces;
 	GridLayout layout = new GridLayout();
 	Piece[][] red;
 	Piece[][] black;
-	private JLabel currentDrag;
+	private PieceImage currentDrag;
 
 	public Grid() {
-		images = new JLabel[8][8];
+		images = new PieceImage[8][8];
 		red = new Piece[8][8];
 		black = new Piece[8][8];
 		this.createGrid();
@@ -36,7 +36,7 @@ public class Grid {
 				if (i % 2 == j % 2) {
 
 				} else {
-					images[i][j] = new JLabel();
+					images[i][j] = new PieceImage();
 					images[i][j].addMouseListener(new PieceClick(images[i][j]));
 					images[i][j].addMouseMotionListener(new PieceDrag());
 					images[i][j].setOpaque(false);
@@ -87,17 +87,16 @@ public class Grid {
 		}
 	}
 	
-	public void dropPiece(JLabel p) {
+	public void dropPiece(PieceImage pI) {
 		int iIndex = -1;
 		int jIndex = -1;
 		double maxTouch = 0;
-		for (int i = 0; i < 0; i++) {
-			for (int j = 0; j < 0; j++) {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
 				if (i % 2 == j % 2) {
-
 				} else {
 					Rectangle computedIntersection = SwingUtilities.computeIntersection(i * 95, j * 95, 95, 95,
-							p.getBounds());
+							pI.getBounds());
 					double area = computedIntersection.getWidth() * computedIntersection.getHeight();
 					if (area > maxTouch) {
 						iIndex = i;
@@ -107,21 +106,26 @@ public class Grid {
 				}
 			}
 		}
-		p.setBounds(iIndex * 95, jIndex * 95, 95, 95);
+		pI.setBounds(iIndex * 95, jIndex * 95, 95, 95);
+		System.out.println("Dropping piece at " + iIndex + ", " + jIndex);
 	}
 
 	private class PieceClick extends MouseAdapter {
-		private JLabel p;
+		private PieceImage pI;
 
-		public PieceClick(JLabel p) {
-			this.p = p;
+		public PieceClick(PieceImage images) {
+			this.pI = images;
 		}
-
+		
+		
 		@Override
-		public void mousePressed(MouseEvent e) {
-			currentDrag = this.p;
-			reorderComponents(currentDrag);
+		public void mousePressed(MouseEvent e){
+			currentDrag = this.pI;
+			//reorderComponents(currentDrag);
+			System.out.println(currentDrag);
+
 		}
+
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
