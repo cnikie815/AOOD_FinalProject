@@ -120,6 +120,7 @@ public class Grid {
 		@Override
 		public void mousePressed(MouseEvent e) {
 			currentDrag = this.p;
+			reorderComponents(currentDrag);
 		}
 
 		@Override
