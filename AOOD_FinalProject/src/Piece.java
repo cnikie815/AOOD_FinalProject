@@ -4,7 +4,6 @@ import javax.swing.JLabel;
 public class Piece {
 	int t;
 	boolean k;
-	ImageIcon image;
 	public Piece(int team, boolean king){
 		//team 0 = red, 1 = black
 		//king true = king, false = pawn
@@ -26,10 +25,7 @@ public class Piece {
 		}
 		return false;
 	}
-	//checks if its on edge(so it doesn't skip a row)
-	public boolean onEdge() {
-			return false;
-	}
+
 	
-	
+
 }

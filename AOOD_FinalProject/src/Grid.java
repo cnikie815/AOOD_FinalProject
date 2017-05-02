@@ -21,7 +21,7 @@ public class Grid {
 	Piece[][] red;
 	Piece[][] black;
 	private PieceImage currentDrag;
-
+	private int currentX, currentY;
 	public Grid() {
 		images = new PieceImage[8][8];
 		red = new Piece[8][8];
@@ -36,21 +36,33 @@ public class Grid {
 				if (i % 2 == j % 2) {
 
 				} else {
-					images[i][j] = new PieceImage();
-					images[i][j].addMouseListener(new PieceClick(images[i][j]));
-					images[i][j].addMouseMotionListener(new PieceDrag());
-					images[i][j].setOpaque(false);
-					images[i][j].setBounds(i * 95, j * 95, 95, 95);
-					p.add(images[i][j]);
+					if(j != 3 && j != 4){
+						images[i][j] = new PieceImage();
+						images[i][j].addMouseListener(new PieceClick(images[i][j]));
+						images[i][j].addMouseMotionListener(new PieceDrag());
+						images[i][j].setOpaque(false);
+						images[i][j].setBounds(i * 95, j * 95, 95, 95);
+						p.add(images[i][j]);
+					}
+					
 
 					if (j < 3) {
 						black[i][j] = new Piece(1, false);
 						images[i][j].setIcon(new ImageIcon(this.getClass().getResource("BlackPiece.PNG")));
+						images[i][j].setPiece(black[i][j]);
 					} else if (j > 4) {
 						red[i][j] = new Piece(0, false);
 						images[i][j].setIcon(new ImageIcon(this.getClass().getResource("RedPiece.PNG")));
+						images[i][j].setPiece(red[i][j]);
+
 					}
 				}
+			}
+		}
+		
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				System.out.println(images[i][j]);
 			}
 		}
 	}
@@ -90,24 +102,34 @@ public class Grid {
 	public void dropPiece(PieceImage pI) {
 		int iIndex = -1;
 		int jIndex = -1;
-		double maxTouch = 0;
+		double maxTouch = 100;
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				if (i % 2 == j % 2) {
 				} else {
-					Rectangle computedIntersection = SwingUtilities.computeIntersection(i * 95, j * 95, 95, 95,
-							pI.getBounds());
-					double area = computedIntersection.getWidth() * computedIntersection.getHeight();
-					if (area > maxTouch) {
-						iIndex = i;
-						jIndex = j;
-						maxTouch = area;
+					
+					if(pI.canMoveToSpace(i, j, currentX, currentY, images) && (i != currentX && j != currentY)){
+						Rectangle computedIntersection = SwingUtilities.computeIntersection(i * 95, j * 95, 95, 95,
+								pI.getBounds());
+						double area = computedIntersection.getWidth() * computedIntersection.getHeight();
+						if (area > maxTouch) {
+							iIndex = i;
+							jIndex = j;
+							maxTouch = area;
+						}
 					}
 				}
 			}
 		}
-		pI.setBounds(iIndex * 95, jIndex * 95, 95, 95);
-		System.out.println("Dropping piece at " + iIndex + ", " + jIndex);
+		if(iIndex != -1 && jIndex != -1){
+			pI.setBounds(iIndex * 95, jIndex * 95, 95, 95);
+		}
+		else{
+			pI.setBounds(currentX * 95, currentY * 95, 95, 95);
+
+		}
+		currentX = -1;
+		currentY = -1;
 	}
 
 	private class PieceClick extends MouseAdapter {
@@ -121,8 +143,10 @@ public class Grid {
 		@Override
 		public void mousePressed(MouseEvent e){
 			currentDrag = this.pI;
+			currentX = (int)(this.pI.getX()/95);
+			currentY = (int)(this.pI.getY()/95);
+
 			//reorderComponents(currentDrag);
-			System.out.println(currentDrag);
 
 		}
 
@@ -131,6 +155,7 @@ public class Grid {
 		public void mouseReleased(MouseEvent e) {
 			dropPiece(currentDrag);
 			currentDrag = null; 
+
 		}
 	}
 
