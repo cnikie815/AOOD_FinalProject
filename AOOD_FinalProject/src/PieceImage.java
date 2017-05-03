@@ -22,8 +22,6 @@ public class PieceImage extends JPanel {
 	}
 
 	public boolean canMoveToSpace(int x, int y, int myX, int myY, PieceImage images[][]) {
-
-			
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				if (i % 2 == j % 2) {
