@@ -25,7 +25,10 @@ public class Piece {
 		}
 		return false;
 	}
-
+	
+	public int getColor(){
+		return t;
+	}
 	
 
 }
