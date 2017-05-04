@@ -29,7 +29,6 @@ public class PieceImage extends JPanel {
 				if (i % 2 == j % 2) {
 				} else {
 					if (images[i][j] != null && (int)(images[i][j].getPieceX()) == x && (int)(images[i][j].getPieceY()) == y) {
-						System.out.println("Can't move to " + x +", " + y + " bc it is filled");
 						return false;
 					} 
 				}
@@ -37,21 +36,18 @@ public class PieceImage extends JPanel {
 		}
 		if(myPiece.isKing()){
 			if(Math.abs(x-myX) != 1 ||  Math.abs(y-myY) != 1){
-				System.out.println("Can't move to " + x +", " + y + " bc it is too far");
 				return false;
 			}
 		}
 		else{
 			if(myPiece.getColor() == 1){
 				if(Math.abs(x-myX) != 1 ||  y-myY != 1){
-					System.out.println("Can't move to " + x +", " + y + " bc it is too far");
 
 					return false;
 				}
 			}
 			else{
 				if(Math.abs(x-myX) != 1 ||  y-myY != -1){
-					System.out.println("Can't move to " + x +", " + y + " bc it is too far");
 
 					return false;
 				}

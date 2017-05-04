@@ -96,18 +96,15 @@ public class Grid {
 	}
 	
 	public void dropPiece(PieceImage pI) {
-		System.out.println("========================================");
 		int iIndex = -1;
 		int jIndex = -1;
 		double maxTouch = 0;
-		System.out.println("Initial Position: " + currentX + ", " + currentY);
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				if (i % 2 == j % 2) {
 				} else {
 					boolean canMove = pI.canMoveToSpace(i, j, currentX, currentY, images) && (i != currentX && j != currentY);
 					if(canMove){
-						System.out.println("Can move to " + i + ", " + j);
 						Rectangle computedIntersection = SwingUtilities.computeIntersection(i * 95+20, j * 95+20, 55, 55,
 								pI.getBounds());
 						double area = computedIntersection.getWidth() * computedIntersection.getHeight();
