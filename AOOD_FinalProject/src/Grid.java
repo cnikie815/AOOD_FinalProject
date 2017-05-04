@@ -37,7 +37,7 @@ public class Grid {
 
 				} else {
 					if(j != 3 && j != 4){
-						images[i][j] = new PieceImage();
+						images[i][j] = new PieceImage(i, j);
 						images[i][j].addMouseListener(new PieceClick(images[i][j]));
 						images[i][j].addMouseMotionListener(new PieceDrag());
 						images[i][j].setOpaque(false);
@@ -60,11 +60,7 @@ public class Grid {
 			}
 		}
 		
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				System.out.println(images[i][j]);
-			}
-		}
+
 	}
 
 	public JPanel getPanel() {
@@ -100,16 +96,19 @@ public class Grid {
 	}
 	
 	public void dropPiece(PieceImage pI) {
+		System.out.println("========================================");
 		int iIndex = -1;
 		int jIndex = -1;
-		double maxTouch = 100;
+		double maxTouch = 0;
+		System.out.println("Initial Position: " + currentX + ", " + currentY);
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				if (i % 2 == j % 2) {
 				} else {
-					
-					if(pI.canMoveToSpace(i, j, currentX, currentY, images) && (i != currentX && j != currentY)){
-						Rectangle computedIntersection = SwingUtilities.computeIntersection(i * 95, j * 95, 95, 95,
+					boolean canMove = pI.canMoveToSpace(i, j, currentX, currentY, images) && (i != currentX && j != currentY);
+					if(canMove){
+						System.out.println("Can move to " + i + ", " + j);
+						Rectangle computedIntersection = SwingUtilities.computeIntersection(i * 95+20, j * 95+20, 55, 55,
 								pI.getBounds());
 						double area = computedIntersection.getWidth() * computedIntersection.getHeight();
 						if (area > maxTouch) {
@@ -123,6 +122,8 @@ public class Grid {
 		}
 		if(iIndex != -1 && jIndex != -1){
 			pI.setBounds(iIndex * 95, jIndex * 95, 95, 95);
+			pI.setPieceX(iIndex);
+			pI.setPieceY(jIndex);
 		}
 		else{
 			pI.setBounds(currentX * 95, currentY * 95, 95, 95);
@@ -143,8 +144,8 @@ public class Grid {
 		@Override
 		public void mousePressed(MouseEvent e){
 			currentDrag = this.pI;
-			currentX = (int)(this.pI.getX()/95);
-			currentY = (int)(this.pI.getY()/95);
+			currentX = (int)(this.pI.getPieceX());
+			currentY = (int)(this.pI.getPieceY());
 
 			//reorderComponents(currentDrag);
 
