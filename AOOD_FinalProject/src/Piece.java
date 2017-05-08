@@ -26,6 +26,10 @@ public class Piece {
 		return false;
 	}
 	
+	public void setKing(){
+		k = true;
+	}
+	
 	public int getColor(){
 		return t;
 	}

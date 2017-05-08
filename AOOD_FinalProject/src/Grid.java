@@ -121,6 +121,9 @@ public class Grid {
 			pI.setBounds(iIndex * 95, jIndex * 95, 95, 95);
 			pI.setPieceX(iIndex);
 			pI.setPieceY(jIndex);
+			if (pI.getPieceY() == 0 && pI.getColor() == 0){
+				pI.kingMe();
+			}
 		}
 		else{
 			pI.setBounds(currentX * 95, currentY * 95, 95, 95);
@@ -153,7 +156,6 @@ public class Grid {
 		public void mouseReleased(MouseEvent e) {
 			dropPiece(currentDrag);
 			currentDrag = null; 
-
 		}
 	}
 
@@ -169,3 +171,6 @@ public class Grid {
 		}
 	}
 }
+
+
+
