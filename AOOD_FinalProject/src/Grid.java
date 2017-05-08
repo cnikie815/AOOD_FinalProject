@@ -118,9 +118,11 @@ public class Grid {
 			}
 		}
 		if(iIndex != -1 && jIndex != -1){
+			//
 			pI.setBounds(iIndex * 95, jIndex * 95, 95, 95);
 			pI.setPieceX(iIndex);
 			pI.setPieceY(jIndex);
+			//
 		}
 		else{
 			pI.setBounds(currentX * 95, currentY * 95, 95, 95);
