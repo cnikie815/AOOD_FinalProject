@@ -35,9 +35,9 @@ public class Grid {
 			for (int j = 0; j < 8; j++) {
 				if (i % 2 == j % 2) {
 
-				} else {
+				} else {						
+					images[i][j] = new PieceImage(i, j);
 					if(j != 3 && j != 4){
-						images[i][j] = new PieceImage(i, j);
 						images[i][j].addMouseListener(new PieceClick(images[i][j]));
 						images[i][j].addMouseMotionListener(new PieceDrag());
 						images[i][j].setOpaque(false);
@@ -48,11 +48,11 @@ public class Grid {
 
 					if (j < 3) {
 						black[i][j] = new Piece(1, false);
-						images[i][j].setIcon(new ImageIcon(this.getClass().getResource("BlackPiece.PNG")));
+						images[i][j].setIcon(new ImageIcon(Grid.class.getResource("Pieces/BlackPiece.png")));
 						images[i][j].setPiece(black[i][j]);
 					} else if (j > 4) {
 						red[i][j] = new Piece(0, false);
-						images[i][j].setIcon(new ImageIcon(this.getClass().getResource("RedPiece.PNG")));
+						images[i][j].setIcon(new ImageIcon(Grid.class.getResource("Pieces/RedPiece.png")));
 						images[i][j].setPiece(red[i][j]);
 
 					}
